@@ -341,6 +341,8 @@ def emprical_prob(event_occurences, total_experment_attepmts):
 def mat_prob(event_a, total_events_a, event_b, total_event_b):
     result = prob(event_a,total_events_a) + prob(event_b,total_event_b)
 
+    return result
+
 def unmat_prob(event_a, total_events_a, event_b, total_event_b):
     result = (prob(event_a,total_events_a) + prob(event_b,total_event_b)) - (prob(event_a,total_events_a) * prob(event_b,total_event_b))
 
