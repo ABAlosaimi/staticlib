@@ -1,5 +1,6 @@
 from ast import List
 from math import factorial
+from turtle import mode
 
 
 def class_limit(highest, lowest, num_of_classes): 
@@ -56,17 +57,19 @@ def mean_for_grouped_data(x,f,n):
     return result
 
 
-def medine_for_grouped_data(f, cumulative_f):
+def medine_for_grouped_data(f):
     frquncy_column = [column[2] for column in f] 
     half_of_f_sum = sum(frquncy_column) / 2
 
     medine_class = None
+    cumulative_f = 0
     for i in range(len(f)):
         if f[i][3] >= half_of_f_sum:
             medine_class = f[i]
+            cumulative_f = f[i-1][3] if i > 0 else 0
             break
-    if medine_class is None:
-        raise ValueError("No median class found.")
+    if medine_class is None or cumulative_f == 0:
+        raise ValueError("No median class found for this grouped data or invalid cumulative frequency.")
     
     lower_limit = medine_class[0] # 60
     class_width = medine_class[1] - medine_class[0] # 9
@@ -75,27 +78,31 @@ def medine_for_grouped_data(f, cumulative_f):
 
     return result 
 
-def mod(data):
+def mode(data):
     dic = {}
 
     for v in data:
         if v in dic:
-            dic[v] =+ 1
+            dic[v] += 1
         else:
             dic[v] = 1
     
-    mod = dic.get(0)
-    for num, f in dic.items():
-        if f > mod:
-            mod = num
+    mod_num = 0
+    mode_frequncy = 0
 
-    result = [mod]
-    multi_mod = dic.get(mod, None)
+    for num, f in dic.items():
+        if f > mode_frequncy: 
+            mode_frequncy = f 
+            mod_num = num
+
+    result = [mod_num]
+    multi_mod = dic.get(mod_num, None)
 
     if multi_mod is not None:
         result.append(multi_mod)
     
     return result
+  
   
 # measure of variation
 
