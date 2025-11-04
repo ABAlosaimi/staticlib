@@ -1,6 +1,7 @@
 from ast import List
 from math import factorial
 from operator import ne
+from pickletools import float8
 
 
 def class_limit(highest, lowest, num_of_classes): 
@@ -106,8 +107,13 @@ def mode(data):
 def rnge(high,low):
     return high - low
 
-def pop_variance(x,n):
-    sample_mean = mean(x[:][1], n)
+def pop_variance(x):
+    n = len(x)
+    values = []
+    for i in range(n):
+        values.append(x[i][1])
+
+    sample_mean = mean(values, n)
     squared_x_mean = []
     summision_of_squared_x_mean = 0
 
@@ -115,72 +121,97 @@ def pop_variance(x,n):
         squared_x_mean.append((x[i][1] - sample_mean) ** 2)
 
     for squared in squared_x_mean:
-        summision_of_squared_x_mean =+ squared
+        summision_of_squared_x_mean += squared
     
     result = summision_of_squared_x_mean / n
 
     return result
 
-def standard_deviation_pop(x,n):
-    variance = pop_variance(x, n)
+def standard_deviation_pop(x):
+    variance = pop_variance(x) 
     result = variance ** 0.5
 
     return result
 
 
-def sample_variance(x,n):
-    sample_mean = mean(x[:][1], n)
+def sample_variance(x):
+    n = len(x)
+    values = []
+    for i in range(n):
+        values.append(x[i][1])
+
+    sample_mean = mean(values, n)
     squared_x_mean = []
     summision_of_squared_x_mean = 0
 
-    for xi in x:
-        squared_x_mean.append((xi - sample_mean) ** 2)
+    for i in range(n):
+        squared_x_mean.append((x[i][1] - sample_mean) ** 2)
 
     for squared in squared_x_mean:
-        summision_of_squared_x_mean =+ squared
+        summision_of_squared_x_mean += squared
     
     result = summision_of_squared_x_mean / (n-1) 
 
     return result
 
 
-def standard_deviation_sample(x,n):
-    variance = sample_variance(x, n)
+def standard_deviation_sample(x):
+    variance = sample_variance(x)
     result = variance ** 0.5
 
     return result
 
-def variance_grouped(x,n):
-    sample_mean = mean(x[:][3],n)
+def variance_grouped(x):
+    n = len(x)
+    values = []
+    f_sum = 0
+    for i in range(n):
+        values.append(x[i][2] * x[i][3])
+    
+    for i in range(n):
+        f_sum += x[i][2]
+
+    sample_mean = mean(values, f_sum)
     squared_x_mean = []
     summision_of_fi_by_squared_x_mean = 0
 
-    for i in range(len(x)): 
-        squared_x_mean.append((x[i][2] - sample_mean) ** 2)
+    for i in range(n): 
+        squared_x_mean.append((x[i][3] - sample_mean) ** 2)
 
-    for j in range(len(squared_x_mean)):
-        summision_of_fi_by_squared_x_mean =+ x[j][1] * squared_x_mean[j]
+    for j in range(n):
+        summision_of_fi_by_squared_x_mean += (x[j][2] * squared_x_mean[j])
     
-    result = summision_of_fi_by_squared_x_mean / n
+    result = summision_of_fi_by_squared_x_mean / (f_sum - 1)
 
-    return result
+    return round(result, 2)
 
-# cofficient of variation
-def coff_of_variation_sample(x,n):
-    standard_deviation = standard_deviation_sample(x, n)
-    sample_mean = mean(x[:][1], n)
+# the cofficient of variation
 
-    result = (standard_deviation / sample_mean) * 100
+def coff_of_variation_sample(x):
+    n = len(x)
+    values = []
+    for i in range(n):
+        values.append(x[i][1])
 
-    return result
-
-def coff_of_variation_pop(x,n):
-    standard_deviation = standard_deviation_pop(x, n)
-    sample_mean = mean(x[:][1], n)
+    standard_deviation = standard_deviation_sample(x)
+    sample_mean = mean(values, n)
 
     result = (standard_deviation / sample_mean) * 100
 
-    return result
+    return round(result, 2)
+
+def coff_of_variation_pop(x):
+    n = len(x)
+    values = []
+    for i in range(n):
+        values.append(x[i][1])
+
+    standard_deviation = standard_deviation_pop(x)
+    sample_mean = mean(values, n)
+
+    result = (standard_deviation / sample_mean) * 100
+
+    return round(result, 2)
 
 def coumulative_frequncy_percentile(x, desired_rank):
     total_observations = len(x) # N 

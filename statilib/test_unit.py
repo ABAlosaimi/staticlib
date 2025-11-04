@@ -53,6 +53,35 @@ class unit_tests(ut.TestCase):
 
         self.assertEqual(sf.mode(data), [2])
 
+    def test_pop_variance(self):
+        x = [["a", 1],
+             ["b", 2],
+             ["c", 5],
+             ["d", 7],
+             ["e", 10]]
+        
+        self.assertEqual(sf.pop_variance(x), 10.8)
 
+    def test_variance_grouped(self):
+        x = [[50, 59, 6 , 54.5],
+             [60, 69, 10, 64.5],
+             [70, 79, 7 , 74.5],
+             [80, 89, 12, 84.5],
+             [90, 99, 5 , 94.5]]
+        
+        self.assertAlmostEqual(sf.variance_grouped(x), 169.23, places=4)
+
+
+    def test_coff_of_variation_sample(self):
+        x = [[1, 3],
+             [2, 5],
+             [3, 6],
+             [4, 4],
+             [5, 3],
+             [6, 5],
+             [7, 4]]
+        
+        self.assertAlmostEqual(sf.coff_of_variation_sample(x), 25.96, delta=1.00)
+    
 if __name__ == "__main__":
     ut.main()
