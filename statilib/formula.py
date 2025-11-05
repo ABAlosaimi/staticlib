@@ -220,7 +220,7 @@ def coumulative_frequncy_percentile(x, desired_rank):
 
     for i in sorted_x:
         if i <= desired_rank:
-            cumulative_frequncy_for_rank =+ 1
+            cumulative_frequncy_for_rank += 1
 
     if cumulative_frequncy_for_rank > 0:
         result = (cumulative_frequncy_for_rank / total_observations) * 100
@@ -237,7 +237,7 @@ def percentile(x, desired_rank):
 
     for i in sorted_x:
         if i < desired_rank:
-            num_below_desired_rank =+ 1
+            num_below_desired_rank += 1
     
     if num_below_desired_rank > 0:
         result = ((num_below_desired_rank + 0.5) / total_obs) * 100

@@ -82,6 +82,18 @@ class unit_tests(ut.TestCase):
              [7, 4]]
         
         self.assertAlmostEqual(sf.coff_of_variation_sample(x), 25.96, delta=1.00)
+
+    def test_coumulative_frequncy_percentile(self):
+        x = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        desired_rank = 45
+
+        self.assertEqual(sf.coumulative_frequncy_percentile(x, desired_rank), 40.0)
     
+    def test_percentile(self):
+        x = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        desired_rank = 45
+
+        self.assertEqual(sf.percentile(x, desired_rank), 45.0)
+
 if __name__ == "__main__":
     ut.main()
