@@ -2,6 +2,7 @@ from ast import List
 from math import factorial
 from operator import ne
 from pickletools import float8
+import re
 
 
 def class_limit(highest, lowest, num_of_classes): 
@@ -246,17 +247,20 @@ def percentile(x, desired_rank):
     else:
         return None
 
-def percentile_to_value(x,percentile,):
-    total_data_num = len(x)
-    result = (total_data_num * percentile) / 100
+def percentile_to_value(x,percentile):
+    data_num_len = len(x)
+    sorted_x = sorted(x)
+    index = (data_num_len * percentile) / 100
 
-    if result is isinstance(float):
-        result =+ 0.5
-    
+    if isinstance(index, float):
+        index += 0.5
+        result = sorted_x[int(index - 1)]
         return result
-    elif result is isinstance(int):
-        result = (result + (result +1)) / 2
+    
+    elif isinstance(index, int):
+        index = (result + (result +1)) / 2
 
+        result = sorted_x[int(index - 1)]
         return result
     else:
         return None
@@ -264,17 +268,27 @@ def percentile_to_value(x,percentile,):
 
 # the standard scores (z-sores)
 
-def z_scores_pop(value, x, n):
-    sample_mean = mean(x[:][1], n)
-    standard_deviation = standard_deviation_pop(x,n)
+def z_scores_pop(value, x):
+    n = len(x)
+    values = []
+    for i in range(n):
+        values.append(x[i][1])
+    
+    sample_mean = mean(values, n)
+    standard_deviation = standard_deviation_pop(x)
 
     result = (value - sample_mean) / standard_deviation
 
     return result 
 
-def z_scores_sample(value, x, n):
-    sample_mean = mean(x[:][1], n)
-    standard_deviation = standard_deviation_sample(x,n)
+def z_scores_sample(value, x):
+    n = len(x)
+    values = []
+    for i in range(n):
+        values.append(x[i][1])
+    
+    sample_mean = mean(values, n)
+    standard_deviation = standard_deviation_sample(x)
 
     result = (value - sample_mean) / standard_deviation
 

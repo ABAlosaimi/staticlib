@@ -95,5 +95,31 @@ class unit_tests(ut.TestCase):
 
         self.assertEqual(sf.percentile(x, desired_rank), 45.0)
 
+    def test_percentile_to_value(self):
+        x = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        percentile = 45
+
+        self.assertEqual(sf.percentile_to_value(x, percentile), 50)
+
+    def test_z_scores_pop(self):
+        x = [["a", 1],
+             ["b", 2],
+             ["c", 5],
+             ["d", 7],
+             ["e", 10]]
+        value = 7
+
+        self.assertAlmostEqual(sf.z_scores_pop(value, x), 0.73, delta=1.00)
+    
+    def test_z_scores_sample(self):
+        x = [["a", 1],
+             ["b", 2],
+             ["c", 5],
+             ["d", 7],
+             ["e", 10]]
+        value = 7
+
+        self.assertAlmostEqual(sf.z_scores_sample(value, x), 0.82, delta=1.00)
+        
 if __name__ == "__main__":
     ut.main()
