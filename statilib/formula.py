@@ -296,24 +296,24 @@ def z_scores_sample(value, x):
 
 # the quartiles and deciles 
 
-def quar_of(data: list[float]):
+def quar_of(data):
     arragnged_data = sorted(data)
     data_len = len(data)
 
     if data_len % 2 == 0:
         indexs = data_len - 1 
         q2 = (arragnged_data[indexs // 2] + arragnged_data[(indexs // 2) + 1]) / 2 
-        q1 = (arragnged_data[indexs // 4] + arragnged_data[(indexs // 4) + 1]) / 2
-        q3 = (arragnged_data[(indexs // 4) * 3] + arragnged_data[((indexs // 4) * 3) + 1]) / 2
+        q1 = (arragnged_data[indexs // 4 - 1] + arragnged_data[(indexs // 4 - 1) + 1]) / 2
+        q3 = (arragnged_data[(indexs // 2 + 1) + (indexs // 4)] + arragnged_data[(indexs // 2 + 1) + (indexs // 4) + 1]) / 2
     else:
         indexs = data_len - 1 
         q2 = arragnged_data[indexs // 2]
         q1 = arragnged_data[indexs // 4]
-        q3 = arragnged_data[(indexs // 4) * 3]
+        q3 = arragnged_data[(indexs // 2 + 1) + (indexs // 4)]
 
     return [q1, q2, q3] 
 
-def outlier(data: list[float]):
+def outlier(data):
     quar = quar_of(data)
     q1 = quar[0]
     q3 = quar[2]
@@ -326,7 +326,7 @@ def outlier(data: list[float]):
         if i < lower_limit or i > upper_limit:
             outlier.append(i)
 
-    return [lower_limit, upper_limit, outlier] 
+    return outlier 
 
 def correlation_coefficient(data, n):
     sum_of_xy = 0 

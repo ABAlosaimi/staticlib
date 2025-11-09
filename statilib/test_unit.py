@@ -120,6 +120,16 @@ class unit_tests(ut.TestCase):
         value = 7
 
         self.assertAlmostEqual(sf.z_scores_sample(value, x), 0.82, delta=1.00)
+
+    def test_quar_of(self):
+        x = [32, 44, 50, 53, 58, 62, 68, 70, 75, 76, 82, 89, 94, 95]
         
+        self.assertEqual(sf.quar_of(x), [51.5, 69.0, 85.5])
+
+    def test_outlier(self):
+        x = [10, 12, 14, 15, 18, 19, 20, 22, 24, 30, 100]
+        
+        self.assertEqual(sf.outlier(x), [100])
+
 if __name__ == "__main__":
     ut.main()
