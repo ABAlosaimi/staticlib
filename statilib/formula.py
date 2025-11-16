@@ -336,11 +336,11 @@ def correlation_coefficient(data, n):
     sum_of_y_squared = 0 
 
     for i in range(len(data)):
-        sum_of_xy =+ data[i][0] * data[i][1]
-        sum_of_x =+ data[i][0]
-        sum_of_y =+ data[i][1]
-        sum_of_x_squared =+ data[i][0] ** 2
-        sum_of_y_squared =+ data[i][1] ** 2
+        sum_of_xy += data[i][0] * data[i][1]
+        sum_of_x += data[i][0]
+        sum_of_y += data[i][1]
+        sum_of_x_squared += data[i][0] ** 2
+        sum_of_y_squared += data[i][1] ** 2
     
     result = (n * sum_of_xy - sum_of_x * sum_of_y) / ((n * sum_of_x_squared - sum_of_x ** 2) * (n * sum_of_y_squared - sum_of_y ** 2)) ** 0.5
 
@@ -348,24 +348,25 @@ def correlation_coefficient(data, n):
 
 # regression
 
-def regression_line(data, n, x):
+def regression_line(data):
     sum_of_xy = 0 
     sum_of_x = 0 
     sum_of_y = 0 
     sum_of_x_squared = 0 
-    sum_of_y_squared = 0 
+    sum_of_y_squared = 0
+    n = len(data) 
     
     for i in range(len(data)):
-        sum_of_xy =+ data[i][0] * data[i][1]
-        sum_of_x =+ data[i][0]
-        sum_of_y =+ data[i][1]
-        sum_of_x_squared =+ data[i][0] ** 2
-        sum_of_y_squared =+ data[i][1] ** 2
+        sum_of_xy += data[i][0] * data[i][1]
+        sum_of_x += data[i][0]
+        sum_of_y += data[i][1]
+        sum_of_x_squared += data[i][0] ** 2
+        sum_of_y_squared += data[i][1] ** 2
 
     a = (sum_of_y * sum_of_x_squared - sum_of_x * sum_of_xy) / (n * sum_of_x_squared - sum_of_x ** 2)
-    b = (n * sum_of_xy - sum_of_x * sum_of_y) / (n * sum_of_x_squared - sum_of_x ** 2)
+    b = (n * sum_of_xy - sum_of_x * sum_of_y) / (n * sum_of_x_squared - sum_of_x_squared)
 
-    result = a+b*x
+    result = [a,b]
     
     return result  
 

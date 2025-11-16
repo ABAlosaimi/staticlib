@@ -131,5 +131,26 @@ class unit_tests(ut.TestCase):
         
         self.assertEqual(sf.outlier(x), [100])
 
+    def test_correlation_coefficient(self):
+        data = [[1, 2],
+                [2, 3],
+                [3, 5],
+                [4, 4],
+                [5, 6]]
+        n = len(data)
+
+        self.assertAlmostEqual(sf.correlation_coefficient(data, n), 0.9, delta=0.1)
+
+    def test_regression_line(self):
+        data = [[3, 8],
+                [9, 6],
+                [5, 4],
+                [3, 2]]
+        
+        result = sf.regression_line(data)
+        
+        self.assertAlmostEqual(result[0], 4.166, delta=1.0)
+        self.assertAlmostEqual(result[1], 0.166, delta=1.0)
+
 if __name__ == "__main__":
     ut.main()
