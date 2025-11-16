@@ -377,9 +377,8 @@ def prob(event, total_events):
 
 # Bayes' Theorem 
 
-
-def event_comp(prob_of_event, total_events):
-    result = 1 - prob(prob_of_event,total_events)
+def event_comp(event, total_events):
+    result = 1 - prob(event,total_events)
 
     return result
 

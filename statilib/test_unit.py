@@ -151,6 +151,15 @@ class unit_tests(ut.TestCase):
         
         self.assertAlmostEqual(result[0], 4.166, delta=1.0)
         self.assertAlmostEqual(result[1], 0.166, delta=1.0)
+    
+    def test_prob(self):
+        event = 5 
+        total_events = 10
 
+        self.assertEqual(sf.prob(event,total_events), 0.5)
+        self.assertEqual(sf.event_comp(event,total_events), 0.5)
+        self.assertEqual(sf.emprical_prob(event,total_events), 0.5)
+
+    
 if __name__ == "__main__":
     ut.main()
