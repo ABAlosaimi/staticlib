@@ -411,20 +411,22 @@ def independ_intersect_prob(prob_a, total_events_a,prob_b, total_events_b):
     return result
 
 def depend_intersect_prob(prob_a, total_events_a,prob_b, total_events_b):
-    prob_a = prob(prob_a, total_events_a)
+    prob_of_a = prob(prob_a, total_events_a)
     prob_b_given_a = independ_intersect_prob(prob_a, total_events_a, prob_b, total_events_b) / prob(prob_a, total_events_a)
 
-    result = prob_a * prob_b_given_a
+    result = prob_of_a * prob_b_given_a
 
     return result 
-
 
 # counting rules 
 
 def fund_count(ways:List):
     result = 0
-    for i in range(len(ways) - 2):
-        result =+ (ways[i] * ways[i+1])
+    for i in range(len(ways)):
+        if result > 0:
+         result *= ways[i]
+        else:
+         result = ways[i]
     
     return result
 
@@ -437,7 +439,7 @@ def permu_count(r,n):
 
     return result
 
-def comb_count(n,r):
+def comb_count(r,n):
     result = 0 
     fact_n = factorial(n)
     fact_n_r = factorial(n-r)

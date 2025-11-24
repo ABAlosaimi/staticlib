@@ -160,6 +160,57 @@ class unit_tests(ut.TestCase):
         self.assertEqual(sf.event_comp(event,total_events), 0.5)
         self.assertEqual(sf.emprical_prob(event,total_events), 0.5)
 
-    
+
+    def test_mat_prob(self):
+        event_a = 1
+        total_events_a = 6
+        event_b = 1
+        total_events_b = 6
+
+        self.assertAlmostEqual(sf.mat_prob(event_a, total_events_a, event_b, total_events_b), 0.3, delta=0.1)
+
+    def test_unmat_prob(self):
+        event_a = 1
+        total_events_a = 6
+        event_b = 1
+        total_events_b = 6
+
+        self.assertAlmostEqual(sf.unmat_prob(event_a, total_events_a, event_b, total_events_b), 0.30, delta=0.1)
+        
+    def test_Bayes_prob(self):
+        event_a = 3
+        total_events_a = 6
+        event_b = 2
+        total_events_b = 6
+
+        self.assertAlmostEqual(sf.Bayes_prob(event_a, total_events_a, event_b, total_events_b), 0.5, delta=0.1)
+
+    def test_depend_intersect_prob(self):
+        event_a = 3 
+        total_events_a = 6
+        event_b = 2
+        total_events_b = 6
+
+        self.assertAlmostEqual(sf.depend_intersect_prob(event_a, total_events_a, event_b, total_events_b), 0.16, delta=0.1) 
+
+
+    def test_fund_count(self):
+        ways = [5,3,6]
+
+        self.assertEqual(sf.fund_count(ways), 90)
+
+    def test_permu_count(self):
+        n = 6 
+        r = 4 
+
+        self.assertEqual(sf.permu_count(r,n), 360)
+
+    def test_comb_count(self):
+        n = 52
+        r = 4
+
+        self.assertEqual(sf.comb_count(r,n), 270725)
+
+
 if __name__ == "__main__":
     ut.main()
