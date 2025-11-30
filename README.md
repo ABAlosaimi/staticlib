@@ -58,7 +58,3 @@ The `formula.py` module implements many functions. Highlights:
 ## Contributing
 
 Feel free to open issues or PRs. Small improvements I'd prioritize:
-
-- Fix arithmetic bugs and replace `=+` with `+=` where needed
-- Add more unit tests and type hints
-- Standardize naming and export a cleaner public API
