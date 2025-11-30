@@ -1,2 +1,6 @@
 /.DS_Store
 /staticsv
+/dist/
+/build/
+*.egg-info
+.env
