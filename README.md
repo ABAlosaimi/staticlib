@@ -57,4 +57,4 @@ The `formula.py` module implements many functions. Highlights:
 
 ## Contributing
 
-Feel free to open issues or PRs. Small improvements I'd prioritize:
+Feel free to open issues or PRs.
